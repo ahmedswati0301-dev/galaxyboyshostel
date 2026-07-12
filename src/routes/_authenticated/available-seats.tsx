@@ -63,13 +63,11 @@ function AvailableSeats() {
                     </div>
 
                     {/* Compact badge mimicking your image circle style */}
-                    <div className={`flex flex-col items-center justify-center h-10 w-10 rounded-full text-center text-[11px] font-bold leading-tight ${
-                      isLastSeat 
-                        ? "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400" 
-                        : "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400"
-                    }`}>
-                      <span>{r.available}</span>
-                      <span className="text-[9px] font-medium -mt-0.5">free</span>
+                    <div className={`status-circle ${isLastSeat ? 'status-circle-last' : 'status-circle-available'} text-[11px] font-bold leading-tight`}>
+                      <div className="flex flex-col items-center">
+                        <span>{r.available}</span>
+                        <span className="text-[9px] font-medium -mt-0.5 opacity-90">free</span>
+                      </div>
                     </div>
                   </div>
 

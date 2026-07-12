@@ -30,37 +30,41 @@ function RoomsIndex() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {rooms.map((r) => {
           const status = (r.available ?? 0) === 0 ? "Full" : (r.occupied ?? 0) === 0 ? "Available" : "Partial";
-          const tone = status === "Full" ? "bg-destructive/10 text-destructive" : status === "Available" ? "bg-warning/20 text-warning-foreground" : "bg-info/15 text-info";
+          const isLastSeat = (r.available ?? 0) === 1;
           return (
-            <Link key={r.id!} to="/rooms/$roomId" params={{ roomId: r.id! }}>
-              <Card className="glass-card p-5 transition hover:-translate-y-0.5 hover:shadow-lg">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-                      <DoorOpen className="h-5 w-5" />
+            <Link key={r.id!} to="/rooms/$roomId" params={{ roomId: r.id! }} className="group">
+              <Card className="relative overflow-hidden border border-slate-100 dark:border-slate-800 bg-card p-4 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-md rounded-2xl">
+                <div className={`absolute top-0 inset-x-0 h-1 ${isLastSeat ? "bg-amber-400/80" : (r.available ?? 0) > 0 ? "bg-emerald-400/80" : "bg-transparent"}`} />
+
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-[17px] font-bold tracking-tight text-slate-900 dark:text-slate-100 group-hover:text-primary transition-colors">Room {r.number}</h3>
+                    <p className="text-xs text-muted-foreground mt-1 truncate">Floor {r.floor} · {r.room_type}</p>
+                  </div>
+
+                  {/* Circular availability indicator (matches available-seats) */}
+                  {(r.available ?? 0) > 0 ? (
+                    <div className="status-circle status-circle-available text-[12px] font-semibold">
+                      <div className="flex flex-col items-center">
+                        <span>{r.available}</span>
+                        <span className="text-[9px] font-medium -mt-0.5 opacity-90">free</span>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-lg font-bold">Room {r.number}</p>
-                      <p className="text-xs text-muted-foreground">Floor {r.floor} · {r.room_type}</p>
-                    </div>
-                  </div>
-                  <Badge className={`${tone} shrink-0`}>{status}</Badge>
+                  ) : (
+                    <Badge variant="outline" className="status-full">Full</Badge>
+                  )}
                 </div>
-                <div className="mt-5 grid grid-cols-3 gap-3 border-t pt-4 text-center">
-                  <div>
-                    <p className="text-xl font-bold">{r.capacity}</p>
-                    <p className="text-xs text-muted-foreground">Seats</p>
+
+                <p className="text-xs text-muted-foreground/80 font-medium mt-3">{r.capacity} Seater</p>
+
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-baseline justify-between text-xs">
+                  <div className="text-muted-foreground font-medium">
+                    <span className="text-foreground font-semibold">{r.occupied}/{r.capacity}</span> occupied
                   </div>
-                  <div>
-                    <p className="text-xl font-bold">{r.occupied}</p>
-                    <p className="text-xs text-muted-foreground">Occupied</p>
-                  </div>
-                  <div>
-                    <p className="text-xl font-bold text-warning-foreground">{r.available}</p>
-                    <p className="text-xs text-muted-foreground">Free</p>
+                  <div className="text-right">
+                    <span className="font-black text-[14px] text-slate-900 dark:text-slate-100">{currency(r.rent_per_seat)}</span>
                   </div>
                 </div>
-                <p className="mt-4 text-sm font-medium">{currency(r.rent_per_seat)}<span className="text-xs text-muted-foreground"> / seat</span></p>
               </Card>
             </Link>
           );

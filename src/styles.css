@@ -169,3 +169,64 @@
   border: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
 }
+
+/* Status pill utilities for consistent badges across themes */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+.status-available {
+  /* distinct blue/primary tone for Available */
+  background: color-mix(in oklab, var(--primary) 18%, var(--card));
+  color: var(--primary-foreground);
+  border-color: color-mix(in oklab, var(--primary) 10%, transparent);
+}
+.dark .status-available {
+  background: color-mix(in oklab, var(--primary) 26%, var(--card));
+  color: var(--primary-foreground);
+  border-color: rgba(255,255,255,0.04);
+}
+
+.status-partial {
+  /* Match Available exactly */
+  background: color-mix(in oklab, var(--primary) 18%, var(--card));
+  color: var(--primary-foreground);
+  border-color: color-mix(in oklab, var(--primary) 10%, transparent);
+}
+.dark .status-partial {
+  background: color-mix(in oklab, var(--primary) 26%, var(--card));
+  color: var(--primary-foreground);
+  border-color: rgba(255,255,255,0.04);
+}
+
+.status-full {
+  background: color-mix(in oklab, var(--destructive) 12%, var(--card));
+  color: var(--destructive-foreground);
+  border-color: color-mix(in oklab, var(--destructive) 8%, transparent);
+}
+.dark .status-full { border-color: rgba(255,255,255,0.04); }
+
+/* Circular status for available seats cards */
+.status-circle {
+  display: flex; align-items:center; justify-content:center;
+  width: 2.5rem; height: 2.5rem; border-radius: 9999px; font-weight:700;
+}
+.status-circle-available {
+  background: color-mix(in oklab, var(--primary) 20%, var(--card));
+  color: var(--primary-foreground);
+}
+.dark .status-circle-available { background: color-mix(in oklab, var(--primary) 30%, var(--card)); }
+.status-circle-last {
+  /* match available circle */
+  background: color-mix(in oklab, var(--primary) 20%, var(--card));
+  color: var(--primary-foreground);
+}
+.dark .status-circle-last { background: color-mix(in oklab, var(--primary) 30%, var(--card)); }
