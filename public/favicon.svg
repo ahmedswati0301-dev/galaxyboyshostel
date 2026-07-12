@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Galaxy Boys Hostel">
+  <rect width="64" height="64" rx="16" fill="#172554" />
+  <rect x="17" y="18" width="30" height="28" rx="8" fill="#0f172a" />
+  <rect x="22" y="24" width="8" height="8" rx="2" fill="#ffffff" />
+  <rect x="34" y="24" width="8" height="8" rx="2" fill="#ffffff" />
+  <rect x="22" y="36" width="8" height="10" rx="2" fill="#ffffff" />
+  <rect x="34" y="36" width="8" height="10" rx="2" fill="#ffffff" />
+  <path d="M18 34h28v10a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V34Z" fill="#c7d2fe" opacity="0.2" />
+  <path d="M25 16h14a2 2 0 0 1 2 2v2H23v-2a2 2 0 0 1 2-2Z" fill="#6366f1" />
+  <path d="M28 26h8v4h-8v-4Z" fill="#0f172a" opacity="0.7" />
+</svg>
