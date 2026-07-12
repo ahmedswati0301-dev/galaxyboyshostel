@@ -136,11 +136,10 @@ function StudentsPage() {
               <Field label="CNIC" value={selected.cnic} />
               <Field label="Father Name" value={selected.father_name} />
               <Field label="Emergency" value={selected.emergency_contact} />
-              <Field label="University" value={selected.university} />
-              <Field label="Department" value={selected.department} />
               <Field label="Room" value={selected.rooms ? `Room ${selected.rooms.number} · Seat ${selected.seat_number}` : "—"} />
               <Field label="Monthly Rent" value={currency(selected.monthly_rent)} />
               <Field label="Admitted" value={dateLabel(selected.admission_date)} />
+              <Field label="Tenure" value={selected.admission_date ? tenureMonths(selected.admission_date) : "—"} />
               <Field label="Status" value={selected.status} />
               <div className="col-span-2"><Field label="Address" value={selected.address} /></div>
               <div className="col-span-2"><Field label="Notes" value={selected.notes} /></div>
@@ -158,6 +157,19 @@ function StudentsPage() {
       />
     </div>
   );
+}
+
+function tenureMonths(dateString: string | null | undefined) {
+  if (!dateString) return null;
+  const start = new Date(dateString);
+  if (Number.isNaN(start.getTime())) return null;
+  const now = new Date();
+  let months = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth();
+  if (now.getDate() < start.getDate()) {
+    months -= 1;
+  }
+  const tenure = Math.max(months + 1, 0);
+  return `${tenure} month${tenure === 1 ? "" : "s"}`;
 }
 
 function Field({ label, value }: { label: string; value?: string | null }) {
