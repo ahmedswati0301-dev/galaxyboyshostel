@@ -102,32 +102,32 @@ function Dashboard() {
             <Link to="/available-seats" className="text-sm font-medium text-primary hover:underline">View all →</Link>
           </div>
 
-          {availableRooms.length === 0 ? (
-            <p className="py-10 text-center text-sm text-muted-foreground">All rooms are full 🎉</p>
-          ) : (
-            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {availableRooms.slice(0, 6).map((r) => (
-                <Link
-                  key={r.id!}
-                  to="/rooms/$roomId"
-                  params={{ roomId: r.id! }}
-                  className="group rounded-[28px] border border-border/60 bg-background p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-lg"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-lg font-semibold">Room {r.number}</p>
-                      <p className="mt-1 text-sm text-muted-foreground">Floor {r.floor} · {r.room_type}</p>
+            {availableRooms.length === 0 ? (
+              <p className="py-10 text-center text-sm text-muted-foreground">All rooms are full 🎉</p>
+            ) : (
+              <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                {availableRooms.slice(0, 6).map((r) => (
+                  <Link
+                    key={r.id!}
+                    to="/rooms/$roomId"
+                    params={{ roomId: r.id! }}
+                    className="group flex flex-col justify-between rounded-2xl border border-border/50 bg-background p-4 shadow-sm transition hover:shadow-lg"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-lg font-semibold truncate">Room {r.number}</p>
+                        <p className="mt-1 text-sm text-muted-foreground truncate">Floor {r.floor} · {r.room_type}</p>
+                        <p className="mt-3 text-xs text-muted-foreground">{r.occupied}/{r.capacity} occupied</p>
+                      </div>
+                      <div className="flex flex-col items-end">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-warning/20 text-warning-foreground text-sm font-semibold">{r.available}</div>
+                        <div className="mt-2 text-sm font-semibold text-foreground">{currency(r.rent_per_seat)}</div>
+                      </div>
                     </div>
-                    <Badge className="rounded-full bg-warning/20 px-3 py-1 text-sm text-warning-foreground">{r.available} free</Badge>
-                  </div>
-                  <div className="mt-5 flex items-center justify-between text-sm text-muted-foreground">
-                    <span>{r.occupied}/{r.capacity} occupied</span>
-                    <span className="font-semibold text-foreground">{currency(r.rent_per_seat)}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
+                  </Link>
+                ))}
+              </div>
+            )}
         </Card>
 
         <Card className="glass-card p-6">
@@ -135,14 +135,21 @@ function Dashboard() {
             <Activity className="h-4 w-4 text-muted-foreground" />
             <h2 className="text-lg font-semibold">Recent Activity</h2>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {activity.length === 0 && <p className="text-sm text-muted-foreground">No activity yet.</p>}
-            {activity.map((a) => (
-              <div key={a.id} className="rounded-3xl border border-border/70 bg-muted/50 p-4">
-                <p className="text-sm font-medium">{a.message}</p>
-                <p className="mt-2 text-xs text-muted-foreground">{dateLabel(a.created_at)}</p>
-              </div>
-            ))}
+            <div className="flex flex-col gap-3 overflow-y-auto max-h-80 pr-2">
+              {activity.map((a) => (
+                <div key={a.id} className="flex items-start gap-3 rounded-2xl border border-border/60 bg-background p-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted/30 text-muted-foreground">
+                    <Activity className="h-4 w-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium truncate">{a.message}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">{dateLabel(a.created_at)}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </Card>
       </div>
