@@ -67,18 +67,18 @@ function Dashboard() {
             </div>
 
             <div className="grid gap-3">
-              <div className="rounded-3xl border border-sky-200/80 bg-sky-50/80 p-4">
-                <p className="text-sm text-sky-700">Open seats</p>
-                <p className="mt-2 text-3xl font-semibold text-sky-800">{available}</p>
-              </div>
-              <div className="rounded-3xl border border-emerald-200/80 bg-emerald-50/80 p-4">
-                <p className="text-sm text-emerald-700">Vacant rooms</p>
-                <p className="mt-2 text-3xl font-semibold text-emerald-900">{vacantRooms}</p>
-              </div>
-              <div className="rounded-3xl border border-rose-200/80 bg-rose-50/80 p-4">
-                <p className="text-sm text-rose-700">Pending rent balance</p>
-                <p className="mt-2 text-3xl font-semibold text-rose-900">{currency(pending)}</p>
-              </div>
+                <div className="rounded-3xl border border-sky-200/80 bg-sky-50/80 p-4 dark:border-sky-800/60 dark:bg-sky-900/40">
+                  <p className="text-sm text-sky-700 dark:text-sky-300">Open seats</p>
+                  <p className="mt-2 text-3xl font-semibold text-sky-800 dark:text-sky-100">{available}</p>
+                </div>
+                <div className="rounded-3xl border border-emerald-200/80 bg-emerald-50/80 p-4 dark:border-emerald-800/60 dark:bg-emerald-900/35">
+                  <p className="text-sm text-emerald-700 dark:text-emerald-200">Vacant rooms</p>
+                  <p className="mt-2 text-3xl font-semibold text-emerald-900 dark:text-emerald-100">{vacantRooms}</p>
+                </div>
+                <div className="rounded-3xl border border-rose-200/80 bg-rose-50/80 p-4 dark:border-rose-800/60 dark:bg-rose-900/35">
+                  <p className="text-sm text-rose-700 dark:text-rose-200">Pending rent balance</p>
+                  <p className="mt-2 text-3xl font-semibold text-rose-900 dark:text-rose-200">{currency(pending)}</p>
+                </div>
             </div>
           </div>
         </Card>
